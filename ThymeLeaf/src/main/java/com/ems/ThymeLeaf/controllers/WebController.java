@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.ems.ThymeLeaf.entity.Employee;
 import com.ems.ThymeLeaf.repository.EmployeeRepo;
 import com.ems.ThymeLeaf.service.employeeService;
+import com.ems.ThymeLeaf.service.employeeServiceImpl;
 
 @Controller
 public class WebController {
 	
 	@Autowired
-	private employeeService employeeService;
+	private employeeServiceImpl employeeService;
 	
 	@Autowired
 	private EmployeeRepo employeeRepository;
