@@ -22,11 +22,12 @@ public class WebController {
 	@Autowired
 	private EmployeeRepo employeeRepository;
 	
-	@RequestMapping("/home")
-	public String index() {
-		
+	@GetMapping("/")
+	public String homePage() {
 		return "home";
 	}
+	
+	
 	@RequestMapping("/showall")
 	public String showall() {
 		return "showemp";
@@ -49,5 +50,8 @@ public class WebController {
 		model.addAttribute("employee",employee);
 		return "showEmployee";
 	}
-	
+	@GetMapping("/login")
+	public String login() {
+		return"login";
+	}
 }
