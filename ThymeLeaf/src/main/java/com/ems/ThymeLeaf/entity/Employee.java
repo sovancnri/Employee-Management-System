@@ -1,15 +1,39 @@
 package com.ems.ThymeLeaf.entity;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+
+@Entity
+@Table(name="emp", uniqueConstraints = @UniqueConstraint(columnNames="empUsrnm"))
 public class Employee {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int empId;
+	@Column
 	private String empUsrnm;
+	@Column
 	private String empPwd;
+	@Column
 	private String empRole;
+	
 	public Employee() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Employee(String empUsrnm, String empPwd, String empRole) {
+		super();
+		this.empUsrnm = empUsrnm;
+		this.empPwd = empPwd;
+		this.empRole = empRole;
+	}
+
 	public int getEmpId() {
 		return empId;
 	}
@@ -39,5 +63,4 @@ public class Employee {
 		return "Employee [empId=" + empId + ", empUsrnm=" + empUsrnm + ", empPwd=" + empPwd + ", empRole=" + empRole
 				+ "]";
 	}
-	
 }
