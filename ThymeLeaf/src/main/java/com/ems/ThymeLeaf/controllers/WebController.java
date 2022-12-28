@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ems.ThymeLeaf.entity.Employee;
 import com.ems.ThymeLeaf.repository.EmployeeRepo;
@@ -48,6 +49,12 @@ public class WebController {
 		Employee employee = employeeService.getEmployeeById(id);
 		model.addAttribute("employee",employee);
 		return "showEmployee";
+	}
+	@GetMapping({"/list"})
+	public ModelAndView getAllEmployees() {
+		ModelAndView mav = new ModelAndView("viewall");
+		mav.addObject("employees", employeeRepository.findAll());
+		return mav;
 	}
 	
 }
