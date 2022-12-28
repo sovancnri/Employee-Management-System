@@ -45,7 +45,7 @@ public class WebController{
 		System.out.println(e);
 		employeeService.saveEmployee(e);
 		session.setAttribute("msg", "Employee Added Successfully");
-		return "home";
+		return "redirect:/";
 	}
 	
 	@GetMapping("/showEmployee/{id}")
