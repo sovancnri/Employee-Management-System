@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- <html xmlns:th="http://www.thymeleaf.org"> -->
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -38,7 +39,7 @@
                         }
                         else {
                             alert("Registeration successful");
-                            document.getElementById("registerForm").action = "@{/register}";
+                            document.getElementById("registerForm").action ="/register";
                             return true;
                         }
                     }
@@ -108,7 +109,6 @@
             background-color: rgb(255, 255, 255);
             outline: none;
         }
-/* 
         .registerbtn {
             background-color: #acc6e2;
             color: rgb(0, 0, 0);
@@ -121,7 +121,7 @@
             font-weight: bolder;
             font-size: large;
 
-        } */
+        } 
     </style>
 </head>
 <body>

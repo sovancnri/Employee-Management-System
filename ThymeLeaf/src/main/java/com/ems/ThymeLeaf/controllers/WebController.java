@@ -46,7 +46,7 @@ public class WebController{
 	public String empRegister(@ModelAttribute Employee e) {
 		System.out.println(e);
 		employeeService.saveEmployee(e);
-		return "add_emp";
+		return "home";
 	}
 	
 	@GetMapping("/showEmployee/{id}")
@@ -57,9 +57,10 @@ public class WebController{
 		model.addAttribute("employee",employee);
 		return employee;
 	}
-	@GetMapping("/login?role={role}")
-	public String login(@PathVariable("role") String role) {
-		System.out.println(role);
+	@GetMapping("/login")
+//	public String login(@PathVariable("role") String role) {
+	public String login() {
+//		System.out.println(role);
 		return "login";
 	}
 }
