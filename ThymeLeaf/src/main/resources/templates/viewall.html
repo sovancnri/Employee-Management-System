@@ -1,44 +1,280 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-	
-	<head>
-		<title>List Employees</title>
+
+<head>
+	<title>List Employees</title>
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+		integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" />
+	<style>
 		
-		<link rel="stylesheet" 
-			href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" 
-			integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" 
-			crossorigin="anonymous" />
-	</head>
-	
-	<body>
-		
-		<div class="container">
-		
-			<h3>List Employees</h3>
-			
-			<hr/>
-		
-			<table class="table table-bordered table-striped">
-			
-				<thead>
-					<tr>
-						<th>Id</th>
-						<th>Username</th>
-						<th>Role</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="employee: ${employees}">
-						<td th:text="${employee.empId}" />
-						<td th:text="${employee.empUsrnm}" />
-						<td th:text="${employee.empPwd}" />
-					</tr>
-				</tbody>
-				
-			</table>
-		</div>
-		
-		
-	</body>
-	
+
+		.t-bcolor {
+			background-color: skyblue;
+			border-width: 5px;
+			border-color: grey;
+		}
+
+		.pager-nav:hover {
+			cursor: pointer;
+		}
+
+		.pg-selected {
+			margin: 5px;
+			color: white;
+			font-weight: bold;
+			background-color: skyblue;
+			font-weight: bold;
+		}
+
+		.tb {
+			color: black;
+		}
+
+		.container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			min-height: 100vh;
+			flex-direction: column;
+		}
+	</style>
+
+
+
+</head>
+
+<body>
+	<div class="container">
+		<h3>Employee Database</h3>
+
+
+
+
+		<table class="table table-bordered t-bcolor" id="pager">
+			<!-- <table id="pager" class="wp-list-table widefat striped posts"> -->
+			<thead class="tb">
+				<tr>
+					<th>Id</th>
+					<th>Username</th>
+					<th>Role</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="employee: ${employees}">
+					<td th:text="${employee.empId}" ></td>
+					<td th:text="${employee.empUsrnm}"></td>
+					<td th:text="${employee.empRole}"></td>
+				</tr>
+			</tbody>
+		</table>
+
+
+		<div id="pageNavPosition" class="pager-nav"></div>
+
+		<!-- <script src="PagerJS.js" defer></script> -->
+
+
+	</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.3.slim.js"
+	integrity="sha256-DKU1CmJ8kBuEwumaLuh9Tl/6ZB6jzGOBV/5YpNE2BWc=" crossorigin="anonymous"></script>
+<script>
+	/* eslint-env browser */
+	/* global document */
+
+	function Pager(tableName, itemsPerPage) {
+		'use strict';
+
+		this.tableName = tableName;
+		this.itemsPerPage = itemsPerPage;
+		this.currentPage = 1;
+		this.pages = 0;
+		this.inited = false;
+		this.startRow = 0;
+		this.endRow = 0;
+
+		this.showRecords = function (from, to) {
+			let rows = document.getElementById(tableName).rows;
+
+			// i starts from 1 to skip table header row
+			for (let i = 1; i < rows.length; i++) {
+				if (i < from || i > to) {
+					rows[i].style.display = 'none';
+				} else {
+					rows[i].style.display = '';
+				}
+			}
+		};
+
+		this.showPage = function (pageNumber) {
+			if (!this.inited) {
+				// Not initialized
+				return;
+			}
+
+			let oldPageAnchor = document.getElementById('pg' + this.currentPage);
+			oldPageAnchor.className = 'pg-normal';
+
+			this.currentPage = pageNumber;
+			let newPageAnchor = document.getElementById('pg' + this.currentPage);
+			newPageAnchor.className = 'pg-selected';
+
+			let from = (pageNumber - 1) * itemsPerPage + 1;
+			let to = from + itemsPerPage - 1;
+			this.startRow = from;
+			this.endRow = to;
+			this.showRecords(from, to);
+
+			let pgNext = document.querySelector('.pg-next'),
+				pgPrev = document.querySelector('.pg-prev');
+
+			if (this.currentPage == this.pages) {
+				pgNext.style.display = 'none';
+			} else {
+				pgNext.style.display = '';
+			}
+
+			if (this.currentPage === 1) {
+				pgPrev.style.display = 'none';
+			} else {
+				pgPrev.style.display = '';
+			}
+		};
+
+		this.prev = function () {
+			if (this.currentPage > 1) {
+				this.showPage(this.currentPage - 1);
+			}
+		};
+
+		this.next = function () {
+			if (this.currentPage < this.pages) {
+				this.showPage(this.currentPage + 1);
+			}
+		};
+
+		this.init = function () {
+			let rows = document.getElementById(tableName).rows;
+			let records = (rows.length - 1);
+
+			this.pages = Math.ceil(records / itemsPerPage);
+			this.inited = true;
+		};
+
+		this.showPageNav = function (pagerName, positionId) {
+			if (!this.inited) {
+				// Not initialized
+				return;
+			}
+
+			let element = document.getElementById(positionId),
+				pagerHtml = '<span onclick="' + pagerName + '.prev();" class="pg-normal pg-prev">« &nbsp; </span>';
+
+			for (let page = 1; page <= this.pages; page++) {
+				pagerHtml += '<span id="pg' + page + '" class="pg-normal pg-next"  onclick="' + pagerName + '.showPage(' + page + ');">&nbsp;' + page + '&nbsp; </span>';
+			}
+
+			pagerHtml += '<span onclick="' + pagerName + '.next();" class="pg-normal">»</span>';
+
+			element.innerHTML = pagerHtml;
+		};
+	}
+	function sortTable(colNo, order, startRow, endRow) {
+		var table, rows, switching, i, x, y, shouldSwitch;
+		table = document.getElementById("pager");
+		switching = true;
+		/*Make a loop that will continue until
+		no switching has been done:*/
+		while (switching) {
+			//start by saying: no switching is done:
+			switching = false;
+			rows = table.rows;
+			/*Loop through all table rows (except the
+			first, which contains table headers):*/
+			for (i = startRow; i < endRow; i++) {
+				//start by saying there should be no switching:
+				shouldSwitch = false;
+				/*Get the two elements you want to compare,
+				one from current row and one from the next:*/
+				x = rows[i].getElementsByTagName("TD")[colNo];
+				y = rows[i + 1].getElementsByTagName("TD")[colNo];
+				if (order === "asc") {
+					//check if the two rows should switch place:
+
+					if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+						//if so, mark as a switch and break the loop:
+						shouldSwitch = true;
+						break;
+					}
+				}
+				else {
+
+					if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+						//if so, mark as a switch and break the loop:
+						shouldSwitch = true;
+						break;
+					}
+
+				}
+
+			}
+			if (shouldSwitch) {
+				/*If a switch has been marked, make the switch
+				and mark that a switch has been done:*/
+				rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+				switching = true;
+			}
+		}
+	}
+
+</script>
+<script>
+
+</script>
+
+<script>
+	var pager = new Pager('pager', 3);
+	$(document).ready(function () {
+
+		pager.init();
+		pager.showPageNav('pager', 'pageNavPosition');
+		pager.showPage(1);
+
+		let usernameSort = "desc";
+		let idSort = "desc";
+		let roleSort = "desc";
+		$("th").click(function (event) {
+			let colName = event.target.innerText;
+			console.log(pager.startRow, pager.endRow);
+			switch (colName) {
+				case "Id":
+					sortTable(0, idSort, pager.startRow, pager.endRow);
+					if (idSort === "asc")
+						idSort = "desc";
+					else
+						idSort = "asc";
+					break;
+				case "Username":
+					sortTable(1, usernameSort, pager.startRow, pager.endRow);
+					if (usernameSort === "asc")
+						usernameSort = "desc";
+					else
+						usernameSort = "asc";
+					break;
+				case "Role":
+					sortTable(2, roleSort, pager.startRow, pager.endRow);
+					if (roleSort === "asc")
+						roleSort = "desc";
+					else
+						roleSort = "asc";
+					break;
+			}
+		});
+	}); 
+</script>
+
+
+
+
 </html>
