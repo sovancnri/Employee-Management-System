@@ -1,9 +1,11 @@
 package com.ems.ThymeLeaf.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -72,5 +74,11 @@ public class WebController{
 	ModelAndView mav = new ModelAndView("viewall");
 	mav.addObject("employees", employeeRepository.findAll());
 	return mav;
+	}
+	@DeleteMapping("/delete/{id}")
+	public String delEmp(@PathVariable(value="id") String eid,HttpSession session) {
+			this.employeeService.deleteEmployeeById(Integer.parseInt(eid));
+			session.setAttribute("msg","Employee Deleted Successfully..");
+			return "redirect:/success";
 	}
 }
