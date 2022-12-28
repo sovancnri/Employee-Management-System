@@ -10,11 +10,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ems.ThymeLeaf.entity.Employee;
 import com.ems.ThymeLeaf.repository.EmployeeRepo;
 import com.ems.ThymeLeaf.service.employeeService;
 import com.ems.ThymeLeaf.service.employeeServiceImpl;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class WebController{
@@ -32,20 +35,16 @@ public class WebController{
 		return "home";
 	}
 	
-	
-	@RequestMapping("/showall")
-	public String showall() {
-		return "showemp";
-	}
 	@RequestMapping("/addemp")
 	public String add_emp() {
 		return "add_emp";
 	}
 	
 	@PostMapping("/register")
-	public String empRegister(@ModelAttribute Employee e) {
+	public String empRegister(@ModelAttribute Employee e, HttpSession session) {
 		System.out.println(e);
 		employeeService.saveEmployee(e);
+		session.setAttribute("msg", "Employee Added Successfully");
 		return "home";
 	}
 	
@@ -62,5 +61,11 @@ public class WebController{
 	public String login() {
 //		System.out.println(role);
 		return "login";
+	}
+	@GetMapping({"/list"})
+	public ModelAndView getAllEmployees() {
+	ModelAndView mav = new ModelAndView("viewall");
+	mav.addObject("employees", employeeRepository.findAll());
+	return mav;
 	}
 }
