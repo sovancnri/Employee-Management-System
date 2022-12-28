@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <link
@@ -12,12 +12,18 @@
 <body>
 <th:block th:replace="sections/header"></th:block>
 <br><br><br><br><br>
+	<!-- <div th:if=${session.msg}>
+		<div class="alert alert-success" role="alert" th:text="${session.msg}">
+		</div>
+	</div> -->
 
 	<div class="div2">
 		<form action="/login" method="GET">
-			<button type="submit" style="position: relative;" name="role" value="dev">Developer</button>
-			<button type="submit" style="position: relative;" name="role" value="hr">HR</button>
-<!-- 			<button type="submit" style="position: relative;" name="role" value="manager">Manager</button> -->
+			<button type="submit" style="position: relative;" name="role"
+				value="dev">Developer</button>
+			<button type="submit" style="position: relative;" name="role"
+				value="hr">HR</button>
+			<!-- 			<button type="submit" style="position: relative;" name="role" value="manager">Manager</button> -->
 		</form>
 	</div>
 

@@ -44,10 +44,13 @@ public class WebController{
 	public String empRegister(@ModelAttribute Employee e, HttpSession session) {
 		System.out.println(e);
 		employeeService.saveEmployee(e);
-		session.setAttribute("msg", "Employee Added Successfully");
-		return "redirect:/";
+		session.setAttribute("msg", "Employee Added Successfully....");
+		return "redirect:/success";
 	}
-	
+	@RequestMapping("/success")
+	public String dashboard() {
+		return "success";
+	}
 	@GetMapping("/showEmployee/{id}")
 	@ResponseBody
 	public Employee showEmployee(@PathVariable(value = "id") String id, Model model) {
