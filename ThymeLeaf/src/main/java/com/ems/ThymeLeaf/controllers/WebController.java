@@ -30,8 +30,6 @@ public class WebController{
 	
 	@GetMapping("/")
 	public String homePage() {
-			
-		
 		return "home";
 	}
 	
@@ -64,6 +62,10 @@ public class WebController{
 	public String login() {
 //		System.out.println(role);
 		return "login";
+	}
+	@RequestMapping("/dashboard")
+	public String dashBoard() {
+		return "dashboard";
 	}
 	@GetMapping({"/list"})
 	public ModelAndView getAllEmployees() {
