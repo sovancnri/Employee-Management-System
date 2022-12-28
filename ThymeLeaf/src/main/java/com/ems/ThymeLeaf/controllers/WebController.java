@@ -17,6 +17,8 @@ import com.ems.ThymeLeaf.repository.EmployeeRepo;
 import com.ems.ThymeLeaf.service.employeeService;
 import com.ems.ThymeLeaf.service.employeeServiceImpl;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class WebController{
 	
@@ -28,28 +30,25 @@ public class WebController{
 	
 	@GetMapping("/")
 	public String homePage() {
-			
-		
 		return "home";
 	}
 	
-	
-	@RequestMapping("/showall")
-	public String showall() {
-		return "showemp";
-	}
 	@RequestMapping("/addemp")
 	public String add_emp() {
 		return "add_emp";
 	}
 	
 	@PostMapping("/register")
-	public String empRegister(@ModelAttribute Employee e) {
+	public String empRegister(@ModelAttribute Employee e, HttpSession session) {
 		System.out.println(e);
 		employeeService.saveEmployee(e);
-		return "home";
+		session.setAttribute("msg", "Employee Added Successfully....");
+		return "redirect:/success";
 	}
-	
+	@RequestMapping("/success")
+	public String dashboard() {
+		return "success";
+	}
 	@GetMapping("/showEmployee/{id}")
 	@ResponseBody
 	public Employee showEmployee(@PathVariable(value = "id") String id, Model model) {
@@ -63,6 +62,10 @@ public class WebController{
 	public String login() {
 //		System.out.println(role);
 		return "login";
+	}
+	@RequestMapping("/dashboard")
+	public String dashBoard() {
+		return "dashboard";
 	}
 	@GetMapping({"/list"})
 	public ModelAndView getAllEmployees() {

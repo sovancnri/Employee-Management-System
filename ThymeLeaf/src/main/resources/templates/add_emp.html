@@ -38,7 +38,7 @@
                             return false;
                         }
                         else {
-                            alert("Registeration successful");
+                            /* alert("Registeration successful"); */
                             document.getElementById("registerForm").action ="/register";
                             return true;
                         }
@@ -79,7 +79,8 @@
             margin-right: auto;
             border: 2px solid #0e3721;
             padding: 15px;
-            margin-top: 30px;
+            margin-top: 40px;
+            margin-bottom: 40px;
         }
 
         body {
@@ -116,7 +117,7 @@
             margin: 8px 0;
             border: none;
             cursor: pointer;
-            width: 30%;
+            width: 100%;
             opacity: 0.9;
             font-weight: bolder;
             font-size: large;
@@ -125,6 +126,7 @@
     </style>
 </head>
 <body>
+<th:block th:replace="sections/newheader"></th:block>
 	<form action="" id="registerForm" onsubmit="registerValidate()" method="post">
 
         <div class="container">
@@ -166,5 +168,6 @@
             </div>
         </div>
     </form>
+        <th:block th:replace="sections/newfooter"></th:block>
 </body>
 </html>
