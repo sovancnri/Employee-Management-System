@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ems.ThymeLeaf.entity.Employee;
 import com.ems.ThymeLeaf.repository.EmployeeRepo;
@@ -62,5 +63,11 @@ public class WebController{
 	public String login() {
 //		System.out.println(role);
 		return "login";
+	}
+	@GetMapping({"/list"})
+	public ModelAndView getAllEmployees() {
+	ModelAndView mav = new ModelAndView("viewall");
+	mav.addObject("employees", employeeRepository.findAll());
+	return mav;
 	}
 }
