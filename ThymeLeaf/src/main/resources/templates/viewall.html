@@ -45,6 +45,7 @@
 </head>
 
 <body>
+<th:block th:replace="sections/newheader"></th:block>
 	<div class="container">
 		<h3>Employee Database</h3>
 
@@ -58,6 +59,8 @@
 					<th>Id</th>
 					<th>Username</th>
 					<th>Role</th>
+					<th>Edit</th>
+					<th>Delete</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -65,6 +68,8 @@
 					<td th:text="${employee.empId}" ></td>
 					<td th:text="${employee.empUsrnm}"></td>
 					<td th:text="${employee.empRole}"></td>
+					<td><a class="btn btn-sm btn-primary">Edit</a></td>
+					<td><a class="btn btn-sm btn-danger">Delete</a></td>
 				</tr>
 			</tbody>
 		</table>
@@ -76,6 +81,7 @@
 
 
 	</div>
+	<th:block th:replace="sections/oldfooter"></th:block>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.3.slim.js"
 	integrity="sha256-DKU1CmJ8kBuEwumaLuh9Tl/6ZB6jzGOBV/5YpNE2BWc=" crossorigin="anonymous"></script>
