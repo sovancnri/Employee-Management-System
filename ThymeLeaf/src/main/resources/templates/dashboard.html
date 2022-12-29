@@ -3,8 +3,35 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+
+
+<style>
+.boo{
+
+
+display: inline-block;
+}
+
+</style>
+
 </head>
 <body>
-Dashuboard
+	
+	<th:block th:replace="sections/newheader"></th:block>
+
+	<div class="container boo">
+		<div>
+			<a href="">Edit Profile</a>
+		</div>
+		<div>
+			<a href="">Resignation</a>
+		</div>
+		<div>
+			<a href="">Change password</a>
+		</div>
+	</div>
+	
+	 <th:block th:replace="sections/newfooter"></th:block>
+
 </body>
 </html>
