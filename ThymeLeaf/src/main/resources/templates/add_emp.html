@@ -5,169 +5,154 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <script>
-        function  registerValidate(){
-            var name = document.getElementById("empUsrnm").value;
-            var password = document.getElementById("empPwd").value;
-            var cpassword = document.getElementById("empCpwd").value;
+	function registerValidate() {
+		var name = document.getElementById("empUsrnm").value;
+		var password = document.getElementById("empPwd").value;
+		var cpassword = document.getElementById("empCpwd").value;
 
-            var alphaExp = /^[a-zA-Z\s]+$/;
-            var passExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$/;
+		var alphaExp = /^[a-zA-Z\s]+$/;
+		var passExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$/;
 
-            if (name.length <= 2) {
-                document.getElementById("empUsrnm").focus();
-                alert("Name should be greater than 2 characters");
-                return false;
-            }
-            else {
-                if (!name.match(alphaExp)) {
-                    document.getElementById("empUsrnm").focus();
-                    alert("Please enter only letters for your name");
-                    return false;
-                }
-                else {
-                    if (!password.match(passExp)) {
-                        document.getElementById("empPwd").focus();
-                        alert("Please enter a password between 8 to 20 characters with at least one lowercase letter, one uppercase letter, one numeric digit, and one special character");
-                        return false;
-                    }
-                    else {
+		if (name.length <= 2) {
+			document.getElementById("empUsrnm").focus();
+			alert("Name should be greater than 2 characters");
+			return false;
+		} else {
+			if (!name.match(alphaExp)) {
+				document.getElementById("empUsrnm").focus();
+				alert("Please enter only letters for your name");
+				return false;
+			} else {
+				if (!password.match(passExp)) {
+					document.getElementById("empPwd").focus();
+					alert("Please enter a password between 8 to 20 characters with at least one lowercase letter, one uppercase letter, one numeric digit, and one special character");
+					return false;
+				} else {
 
-                        if (password != cpassword) {
-                            document.getElementById("empCpwd").focus();
-                            alert("Password and confirm password does not match")
-                            return false;
-                        }
-                        else {
-                            /* alert("Registeration successful"); */
-                            document.getElementById("registerForm").action ="/register";
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-    
-    </script>
+					if (password != cpassword) {
+						document.getElementById("empCpwd").focus();
+						alert("Password and confirm password does not match")
+						return false;
+					} else {
+						/* alert("Registeration successful"); */
+						document.getElementById("registerForm").action = "/register";
+						return true;
+					}
+				}
+			}
+		}
+	}
+</script>
 <style>
-        @font-face {
-            font-family: myFirstFont;
-            src: url(fonts/JosefinSansSemibold-p7Z0v.ttf);
-        }
+@font-face {
+	font-family: myFirstFont;
+	src: url(fonts/JosefinSansSemibold-p7Z0v.ttf);
+}
 
+* {
+	font-family: myFirstFont;
+}
 
-        * {
-            font-family: myFirstFont;
+.container {
+	padding: 20px;
+	/* background-color: lightblue; */
+}
 
-        }
+.center {
+	border: 5px solid;
+	text-align: center;
+}
 
-        .container {
-            padding: 20px;
-            /* background-color: lightblue; */
-        }
+form {
+	background: #EAFDFC;
+	box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
+	border-radius: 12px;
+	width: 700px;
+	margin-left: auto;
+	margin-right: auto;
+	border: 2px solid #0e3721;
+	padding: 15px;
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
 
-        .center {
-            border: 5px solid;
-            text-align: center;
-        }
+body {
+	background-color: #C0DEFF;
+}
 
-        form {
-            background: #EAFDFC;
-            box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
-            border-radius: 12px;
-            width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            border: 2px solid #0e3721;
-            padding: 15px;
-            margin-top: 40px;
-            margin-bottom: 40px;
-        }
+input, textarea {
+	border-radius: 12px;
+}
 
-        body {
-            background-color: #C0DEFF;
-        }
+input[type=text], input[type=password], textarea {
+	width: 100%;
+	padding: 15px;
+	margin: 5px 0 22px 0;
+	display: inline-block;
+	border: 12px;
+	background: #ffffff;
+}
 
-        input,
-        textarea {
-            border-radius: 12px;
+input[type=text]:focus, input[type=password]:focus, input[type=submit]:focus
+	{
+	background-color: rgb(255, 255, 255);
+	outline: none;
+}
 
-        }
-
-        input[type=text],
-        input[type=password],
-        textarea {
-            width: 100%;
-            padding: 15px;
-            margin: 5px 0 22px 0;
-            display: inline-block;
-            border: 12px;
-            background: #ffffff;
-        }
-
-        input[type=text]:focus,
-        input[type=password]:focus,
-        input[type=submit]:focus {
-            background-color: rgb(255, 255, 255);
-            outline: none;
-        }
-        .registerbtn {
-            background-color: #acc6e2;
-            color: rgb(0, 0, 0);
-            padding: 10px 15px;
-            margin: 8px 0;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            opacity: 0.9;
-            font-weight: bolder;
-            font-size: large;
-
-        } 
-    </style>
+.registerbtn {
+	background-color: #acc6e2;
+	color: rgb(0, 0, 0);
+	padding: 10px 15px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+	opacity: 0.9;
+	font-weight: bolder;
+	font-size: large;
+}
+</style>
 </head>
 <body>
-<th:block th:replace="sections/newheader"></th:block>
-	<form action="" id="registerForm" onsubmit="registerValidate()" method="post">
+	<th:block th:replace="sections/newheader"></th:block>
+	<form action="" id="registerForm" onsubmit="registerValidate()"
+		method="post">
 
-        <div class="container">
-            <center>
-                <h1> Add New Employee</h1>
-            </center>
-            <hr>
+		<div class="container">
+			<center>
+				<h1>Add New Employee</h1>
+			</center>
+			<hr>
 
 
-            <label> Username : </label>
-            <input type="text" name="empUsrnm" id="empUsrnm" placeholder="Username" size="15" />
+			<label> Username : </label> <input type="text" name="empUsrnm"
+				id="empUsrnm" placeholder="Username" size="15" /> <label>
+				Password : </label> <input type="password" name="empPwd" id="empPwd"
+				placeholder="Password" size="15" /> <label> Confirm
+				Password : </label> <input type="password" name="empCpwd" id="empCpwd"
+				placeholder="Confirm Password" size="15" />
 
-            <label> Password : </label>
-            <input type="password" name="empPwd" id="empPwd" placeholder="Password" size="15" />
+			<div>
+				<span> <label> Role : </label></span> <span> <select
+					name="empRole">
 
-            <label> Confirm Password : </label>
-            <input type="password" name="empCpwd" id="empCpwd" placeholder="Confirm Password" size="15" />
+						<option value="Developer">Developer</option>
+						<option value="HR">HR</option>
 
-            <div>
-                <span>
-                    <label>
-                        Role :
-                    </label></span>
-                <span>
-                    <select name="empRole">
+				</select>
+				</span>
+			</div>
 
-                        <option value="Developer">Developer</option>
-                        <option value="HR">HR</option>
+			<br>
 
-                    </select>
-                </span>
-            </div>
+			<div>
+				<label> <input type="submit" value="Sign up"
+					class="registerbtn" />
+				</label>
 
-            <br>
-
-            <div>
-                <label> <input type="submit" value="Sign up" class="registerbtn" /> </label>
-
-            </div>
-        </div>
-    </form>
-        <th:block th:replace="sections/newfooter"></th:block>
+			</div>
+		</div>
+	</form>
+	<th:block th:replace="sections/newfooter"></th:block>
 </body>
 </html>
