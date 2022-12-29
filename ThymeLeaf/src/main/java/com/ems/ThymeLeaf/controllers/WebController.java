@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -81,4 +82,29 @@ public class WebController{
 			session.setAttribute("msg","Employee Deleted Successfully..");
 			return "redirect:/success";
 	}
+	@RequestMapping("/edit/{id}")
+	public ModelAndView showEditProductPage(@PathVariable(name = "id") String eid) {
+	    ModelAndView mav = new ModelAndView("editpage");
+	    Employee emp =employeeService.getEmployeeById(Integer.parseInt(eid));
+	    mav.addObject("emp", emp);
+	     
+	    return mav;
+	}
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	public String saveProduct(@ModelAttribute("product") Employee emp,HttpSession session) {
+		employeeService.saveEmployee(emp);
+		session.setAttribute("msg", "Employee Edited Successfully....");
+	    return "redirect:/success";
+	}
+	@RequestMapping("/view/{id}")
+	public ModelAndView viewDetails(@PathVariable(name = "id") String eid) {
+	    ModelAndView mav = new ModelAndView("viewpage");
+	    Employee emp =employeeService.getEmployeeById(Integer.parseInt(eid));
+	    mav.addObject("emp", emp);
+	     
+	    return mav;
+	}
+	
+	
+	
 }
