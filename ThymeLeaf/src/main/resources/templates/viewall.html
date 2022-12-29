@@ -2,43 +2,43 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>List Employees</title>
+<title>List Employees</title>
 
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-		integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" />
-	<style>
-		
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+	crossorigin="anonymous" />
+<style>
+.t-bcolor {
+	background-color: skyblue;
+	border-width: 5px;
+	border-color: grey;
+}
 
-		.t-bcolor {
-			background-color: skyblue;
-			border-width: 5px;
-			border-color: grey;
-		}
+.pager-nav:hover {
+	cursor: pointer;
+}
 
-		.pager-nav:hover {
-			cursor: pointer;
-		}
+.pg-selected {
+	margin: 5px;
+	color: white;
+	font-weight: bold;
+	background-color: skyblue;
+	font-weight: bold;
+}
 
-		.pg-selected {
-			margin: 5px;
-			color: white;
-			font-weight: bold;
-			background-color: skyblue;
-			font-weight: bold;
-		}
+.tb {
+	color: black;
+}
 
-		.tb {
-			color: black;
-		}
-
-		.container {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			min-height: 100vh;
-			flex-direction: column;
-		}
-	</style>
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	flex-direction: column;
+}
+</style>
 
 
 
@@ -65,7 +65,7 @@
 			</thead>
 			<tbody>
 				<tr th:each="employee: ${employees}">
-					<td th:text="${employee.empId}" ></td>
+					<td th:text="${employee.empId}"></td>
 					<td th:text="${employee.empUsrnm}"></td>
 					<td th:text="${employee.empRole}"></td>
 					<td><a class="btn btn-sm btn-primary">Edit</a></td>
@@ -84,7 +84,8 @@
 	<th:block th:replace="sections/oldfooter"></th:block>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.3.slim.js"
-	integrity="sha256-DKU1CmJ8kBuEwumaLuh9Tl/6ZB6jzGOBV/5YpNE2BWc=" crossorigin="anonymous"></script>
+	integrity="sha256-DKU1CmJ8kBuEwumaLuh9Tl/6ZB6jzGOBV/5YpNE2BWc="
+	crossorigin="anonymous"></script>
 <script>
 	/* eslint-env browser */
 	/* global document */
@@ -235,9 +236,7 @@
 	}
 
 </script>
-<script>
 
-</script>
 
 <script>
 	var pager = new Pager('pager', 3);

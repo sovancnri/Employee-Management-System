@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>Edit Product</title>
+</head>
+<style>
+        @font-face {
+            font-family: myFirstFont;
+            src: url(fonts/JosefinSansSemibold-p7Z0v.ttf);
+        }
+
+
+        * {
+            font-family: myFirstFont;
+
+        }
+
+        .container {
+            padding: 20px;
+            /* background-color: lightblue; */
+        }
+
+        .center {
+            border: 5px solid;
+            text-align: center;
+        }
+
+        form {
+            background: #EAFDFC;
+            box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
+            border-radius: 12px;
+            width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 2px solid #0e3721;
+            padding: 15px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+
+        body {
+            background-color: #C0DEFF;
+        }
+
+        
+        
+        button {
+        	text-align:center;
+            background-color: #acc6e2;
+            color: rgb(0, 0, 0);
+            padding: 10px 15px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+            font-weight: bolder;
+            font-size: large;
+
+        } 
+    </style>
+<body>
+    <div align="center">
+        
+        <br />
+        <form action="#" th:action="@{/save}" th:object="${emp}"
+            method="post">
+ 
+            <table border="0" cellpadding="10">
+            	<h1>Edit Employee</h1>
+                <tr>             
+                    <td>Product ID:</td>
+                    <td>
+                        <input type="text" th:field="*{empId}" readonly="readonly" />
+                    </td>
+                </tr>        
+                <tr>             
+                    <td>Product Name:</td>
+                    <td>
+                        <input type="text" th:field="*{empUsrnm}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td><input type="text" th:field="*{empPwd}" /></td>
+                </tr>
+                <tr>
+                    <td>Role:</td>
+                    <td><input type="text" th:field="*{empRole}" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button type="submit">Save</button> </td>
+                </tr>
+                
+            </table>
+        </form>
+    </div>
+</body>
+</html>

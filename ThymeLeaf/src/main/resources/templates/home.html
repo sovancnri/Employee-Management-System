@@ -7,18 +7,55 @@
 	rel="stylesheet"
 	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
 	crossorigin="anonymous">
+	
+	<style type="text/css">
+	.b{
+	margin: auto;
+	background: #EAFDFC;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	min-height: 40vh;
+	flex-direction: column;
+	box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
+	border-radius: 12px;
+	width: 400px;
+	border: 2px solid #0e3721;
+	padding: 15px;
+
+	}
+
+	
+	.div2 {
+  
+  margin: 1rem;
+  padding: 2rem 2rem;
+  text-align: center;
+}
+.child {
+  display: inline-block;
+
+  padding: 1rem 1rem;
+  vertical-align: middle;
+}
+	</style>
 </head>
 
 <body>
 
-<th:block th:replace="sections/oldheader"></th:block>
-<br><br><br><br><br>
+	<th:block th:replace="sections/oldheader"></th:block>
+	<br>
+	<br>
+	
 	<div class="div2">
 		<form action="/login" method="GET">
-			<button type="submit" style="position: relative;" name="role"
-				value="dev">Developer</button>
-			<button type="submit" style="position: relative;" name="role"
-				value="hr">HR</button>
+		<div class="child"><button class="b" type="submit" style="position: relative;" name="role" value="dev">
+				Developer
+			</button></div>
+			<div  class="child">
+			<button class="b" type="submit" style="position: relative;" name="role" value="hr">
+				HR
+			</button></div>
 			<!-- 			<button type="submit" style="position: relative;" name="role" value="manager">Manager</button> -->
 		</form>
 	</div>
@@ -27,9 +64,11 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
 		crossorigin="anonymous"></script>
-		
-		<br><br><br><br><br>
-<th:block th:replace="sections/oldfooter"></th:block>
+
+	<br>
+	<br>
+	
+	<th:block th:replace="sections/oldfooter"></th:block>
 </body>
 
 </html>
