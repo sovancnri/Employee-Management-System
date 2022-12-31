@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>Edit Product</title>
+</head>
+<style>
+        @font-face {
+            font-family: myFirstFont;
+            src: url(fonts/JosefinSansSemibold-p7Z0v.ttf);
+        }
+
+
+        * {
+            font-family: myFirstFont;
+
+        }
+
+        .container {
+            padding: 20px;
+            /* background-color: lightblue; */
+        }
+
+        .center {
+            border: 5px solid;
+            text-align: center;
+        }
+
+        form {
+            background: #EAFDFC;
+            box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
+            border-radius: 12px;
+            width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 2px solid #0e3721;
+            padding: 15px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+
+        body {
+            background-color: #C0DEFF;
+        }
+
+        input,
+        textarea {
+            border-radius: 12px;
+
+        }
+        
+        a {
+        	text-align:center;
+            background-color: #acc6e2;
+            color: rgb(0, 0, 0);
+            padding: 10px 15px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+            font-weight: bolder;
+            font-size: large;
+            display: block;
+
+        } 
+    </style>
+<body>
+    <div align="center">
+        
+        <br />
+        <form action="#" th:object="${emp}"
+            method="post">
+         
+ 
+            <table border="0" cellpadding="10">
+             <h1>Employee Details</h1>
+                <tr>             
+                    <td style="font-weight:bold ">Employee ID:</td>
+                    <td>
+                        <label type="text" th:field="*{empId}" th:text="${emp.empId}"></label>
+                    </td>
+                </tr>        
+                <tr>             
+                    <td style="font-weight:bold ">Employee Name:</td>
+                    <td>
+                        <label type="text" th:field="*{empUsrnm}" th:text="${emp.empUsrnm}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold ">Password:</td>
+                    <td><label type="text" th:field="*{empPwd}" th:text="${emp.empPwd}"/></td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold ">Role:</td>
+                    <td><label type="text" th:field="*{empRole}" th:text="${emp.empRole}" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><a  th:href="@{/edit/{id}(id=${emp.empId})}">Edit</a> </td>
+                </tr>
+                
+            </table>
+        </form>
+    </div>
+</body>
+</html>

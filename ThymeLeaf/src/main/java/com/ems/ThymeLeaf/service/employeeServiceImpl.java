@@ -16,13 +16,11 @@ public class employeeServiceImpl implements employeeService{
 
 	@Override
 	public void saveEmployee(Employee emp) {
-		// TODO Auto-generated method stub
 		this.employeeRepository.save(emp);
 	}
 
 	@Override
 	public Employee getEmployeeById(int eid) {
-		// TODO Auto-generated method stub
 		Optional<Employee> optional = employeeRepository.findById(eid);
 		Employee employee = null;
 		if(optional.isPresent()) {
@@ -33,9 +31,10 @@ public class employeeServiceImpl implements employeeService{
 		return employee;
 	}
 
+	
+	
 	@Override
 	public void deleteEmployeeById(int eid) {
-		// TODO Auto-generated method stub
 		this.employeeRepository.deleteById(eid);
 	}
 
