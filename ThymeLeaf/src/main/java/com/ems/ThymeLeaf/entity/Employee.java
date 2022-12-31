@@ -13,7 +13,7 @@ import jakarta.persistence.UniqueConstraint;
 public class Employee {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int empId;
 	@Column
 	private String empUsrnm;
@@ -24,7 +24,6 @@ public class Employee {
 	
 	public Employee() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Employee(String empUsrnm, String empPwd, String empRole) {
