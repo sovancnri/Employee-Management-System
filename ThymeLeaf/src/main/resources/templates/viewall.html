@@ -65,11 +65,11 @@
 			</thead>
 			<tbody>
 				<tr th:each="employee: ${employees}">
-					<td th:text="${employee.empId}"></td>
+					<td th:text="${employee.empId}"></td>			<!-- th:href="@{/edit/{id}(id=${employee.id})}" -->
 					<td th:text="${employee.empUsrnm}"></td>
 					<td th:text="${employee.empRole}"></td>
-					<td><a class="btn btn-sm btn-primary">Edit</a></td>
-					<td><a class="btn btn-sm btn-danger">Delete</a></td>
+					<td><a class="btn btn-sm btn-primary" th:href="@{/edit/{id}(id=${employee.empId})}">Edit</a></td>
+					<td><a class="btn btn-sm btn-danger" th:href="@{/delete/{id}(id=${employee.empId})}">Delete</a></td>
 				</tr>
 			</tbody>
 		</table>

@@ -65,19 +65,19 @@
     <div align="center">
         
         <br />
-        <form action="#" th:action="@{/save}" th:object="${emp}"
+        <form th:action="@{/update}" th:object="${emp}"
             method="post">
  
             <table border="0" cellpadding="10">
             	<h1>Edit Employee</h1>
                 <tr>             
-                    <td>Product ID:</td>
+                    <td>Employee ID:</td>
                     <td>
-                        <input type="text" th:field="*{empId}" readonly="readonly" />
+                        <input type="text" th:field="*{empId}" readonly="readonly"/>
                     </td>
                 </tr>        
                 <tr>             
-                    <td>Product Name:</td>
+                    <td>Employee User Name:</td>
                     <td>
                         <input type="text" th:field="*{empUsrnm}" />
                     </td>

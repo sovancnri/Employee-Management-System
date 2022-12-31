@@ -73,10 +73,27 @@ public class WebController{
 	mav.addObject("employees", employeeRepository.findAll());
 	return mav;
 	}
-	@DeleteMapping("/delete/{id}")
-	public String delEmp(@PathVariable(value="id") String eid,HttpSession session) {
-			this.employeeService.deleteEmployeeById(Integer.parseInt(eid));
+	
+	@GetMapping("/delete/{id}")
+	public String delEmp(@PathVariable(value="id") int eid,HttpSession session) {
+			employeeService.deleteEmployeeById(eid);
 			session.setAttribute("msg","Employee Deleted Successfully..");
 			return "redirect:/success";
+	}
+	
+	@GetMapping("/edit/{id}")
+	public String editEmp(@PathVariable int id, Model model) {
+		
+		Employee emp = employeeService.getEmployeeById(id);
+		model.addAttribute("emp",emp);
+		return "editpage";
+	}
+	
+	@PostMapping("/update")
+	public String updateEmp(@ModelAttribute Employee emp, HttpSession session) {
+		
+		employeeService.saveEmployee(emp);
+		session.setAttribute("msg", "Employee Edited Successfully");
+		return "success";
 	}
 }
