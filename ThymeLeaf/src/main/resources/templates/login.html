@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+@font-face {
+	font-family: myFirstFont;
+	src: url(fonts/JosefinSansSemibold-p7Z0v.ttf);
+}
+
+* {
+	font-family: myFirstFont;
+}
+
+.container {
+	padding: 20px;
+}
+
+.center {
+	border: 5px solid;
+	text-align: center;
+}
+
+form {
+	background: #EAFDFC;
+	box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
+	border-radius: 12px;
+	width: 700px;
+	margin-left: auto;
+	margin-right: auto;
+	border: 2px solid #0e3721;
+	padding: 15px;
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+body {
+	background-color: #C0DEFF;
+}
+
+input, textarea {
+	border-radius: 12px;
+}
+
+input[type=text], input[type=password], textarea {
+	width: 95%;
+	padding: 15px;
+	margin: 5px 0 22px 0;
+	display: inline-block;
+	border: 12px;
+	background: #ffffff;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=submit]:focus
+	{
+	background-color: rgb(255, 255, 255);
+	outline: none;
+	margin-right: 30px;
+	;
+}
+
+.registerbtn {
+	background-color: #acc6e2;
+	color: rgb(0, 0, 0);
+	padding: 10px 15px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+	opacity: 0.9;
+	font-weight: bolder;
+	font-size: large;
+}
+</style>
+</head>
+
+<body>
+
+	<th:block th:replace="sections/oldheader"></th:block>
+
+	<form>
+		<div class="container">
+			<center>
+				<h1>Login</h1>
+			</center>
+			<hr>
+			<label> Username : </label> <input type="text" name="empUsrnm"
+				id="empUsrnm" placeholder="Username" size="15" required /> <label>
+				Password : </label> <input type="password" name="empPwd" id="empPwd"
+				placeholder="Password" size="15" required /> <br>
+
+			<div>
+				<label> <input type="submit" value="Sign up"
+					class="registerbtn" />
+				</label>
+
+			</div>
+		</div>
+	</form>
+	<th:block th:replace="sections/oldfooter"></th:block>
+
+</body>
+
+</html>

@@ -1,53 +1,99 @@
 package com.ems.ThymeLeaf.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ems.ThymeLeaf.entity.Employee;
 import com.ems.ThymeLeaf.repository.EmployeeRepo;
 import com.ems.ThymeLeaf.service.employeeService;
+import com.ems.ThymeLeaf.service.employeeServiceImpl;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class WebController {
+public class WebController{
 	
 	@Autowired
-	private employeeService employeeService;
+	private employeeServiceImpl employeeService;
 	
 	@Autowired
 	private EmployeeRepo employeeRepository;
 	
-	@RequestMapping("/home")
-	public String index() {
-		
+	@GetMapping("/")
+	public String homePage() {
 		return "home";
 	}
-	@RequestMapping("/showall")
-	public String showall() {
-		return "showemp";
-	}
+	
 	@RequestMapping("/addemp")
 	public String add_emp() {
 		return "add_emp";
 	}
 	
 	@PostMapping("/register")
-	public String empRegister(@ModelAttribute Employee e) {
+	public String empRegister(@ModelAttribute Employee e, HttpSession session) {
 		System.out.println(e);
 		employeeService.saveEmployee(e);
-		return "add_emp";
+		session.setAttribute("msg", "Employee Added Successfully....");
+		return "redirect:/success";
 	}
-	
+	@RequestMapping("/success")
+	public String dashboard() {
+		return "success";
+	}
 	@GetMapping("/showEmployee/{id}")
-	public String showEmployee(@PathVariable(value = "id") int id, Model model) {
-		Employee employee = employeeService.getEmployeeById(id);
+	@ResponseBody
+	public Employee showEmployee(@PathVariable(value = "id") String id, Model model) {
+		Employee employee = employeeService.getEmployeeById(Integer.parseInt(id));
+		System.out.println(employee);
 		model.addAttribute("employee",employee);
-		return "showEmployee";
+		return employee;
+	}
+	@GetMapping("/login")
+	public String login() {
+		return "login";
+	}
+	@RequestMapping("/dashboard")
+	public String dashBoard() {
+		return "dashboard";
+	}
+	@GetMapping({"/list"})
+	public ModelAndView getAllEmployees() {
+	ModelAndView mav = new ModelAndView("viewall");
+	mav.addObject("employees", employeeRepository.findAll());
+	return mav;
 	}
 	
+	@GetMapping("/delete/{id}")
+	public String delEmp(@PathVariable(value="id") int eid,HttpSession session) {
+			employeeService.deleteEmployeeById(eid);
+			session.setAttribute("msg","Employee Deleted Successfully..");
+			return "redirect:/success";
+	}
+	
+	@GetMapping("/edit/{id}")
+	public String editEmp(@PathVariable int id, Model model) {
+		
+		Employee emp = employeeService.getEmployeeById(id);
+		model.addAttribute("emp",emp);
+		return "editpage";
+	}
+	
+	@PostMapping("/update")
+	public String updateEmp(@ModelAttribute Employee emp, HttpSession session) {
+		
+		employeeService.saveEmployee(emp);
+		session.setAttribute("msg", "Employee Edited Successfully");
+		return "success";
+	}
 }

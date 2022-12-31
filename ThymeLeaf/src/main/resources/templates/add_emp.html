@@ -1,57 +1,157 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.com">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	crossorigin="anonymous">
+<script>
+	function registerValidate() {
+		var name = document.getElementById("empUsrnm").value;
+		var password = document.getElementById("empPwd").value;
+		var cpassword = document.getElementById("empCpwd").value;
+
+		var alphaExp = /^[a-zA-Z\s]+$/;
+		var passExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$/;
+
+		if (name.length <= 2) {
+			document.getElementById("empUsrnm").focus();
+			alert("Name should be greater than 2 characters");
+			return false;
+		} else {
+			if (!name.match(alphaExp)) {
+				document.getElementById("empUsrnm").focus();
+				alert("Please enter only letters for your name");
+				return false;
+			} else {
+				if (!password.match(passExp)) {
+					document.getElementById("empPwd").focus();
+					alert("Please enter a password between 8 to 20 characters with at least one lowercase letter, one uppercase letter, one numeric digit, and one special character");
+					return false;
+				} else {
+
+					if (password != cpassword) {
+						document.getElementById("empCpwd").focus();
+						alert("Password and confirm password does not match")
+						return false;
+					} else {
+						/* alert("Registeration successful"); */
+						document.getElementById("registerForm").action = "/register";
+						return true;
+					}
+				}
+			}
+		}
+	}
+</script>
+<style>
+@font-face {
+	font-family: myFirstFont;
+	src: url(fonts/JosefinSansSemibold-p7Z0v.ttf);
+}
+
+* {
+	font-family: myFirstFont;
+}
+
+.container {
+	padding: 20px;
+	/* background-color: lightblue; */
+}
+
+.center {
+	border: 5px solid;
+	text-align: center;
+}
+
+form {
+	background: #EAFDFC;
+	box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
+	border-radius: 12px;
+	width: 700px;
+	margin-left: auto;
+	margin-right: auto;
+	border: 2px solid #0e3721;
+	padding: 15px;
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+body {
+	background-color: #C0DEFF;
+}
+
+input, textarea {
+	border-radius: 12px;
+}
+
+input[type=text], input[type=password], textarea {
+	width: 100%;
+	padding: 15px;
+	margin: 5px 0 22px 0;
+	display: inline-block;
+	border: 12px;
+	background: #ffffff;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=submit]:focus
+	{
+	background-color: rgb(255, 255, 255);
+	outline: none;
+}
+
+.registerbtn {
+	background-color: #acc6e2;
+	color: rgb(0, 0, 0);
+	padding: 10px 15px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+	opacity: 0.9;
+	font-weight: bolder;
+	font-size: large;
+}
+</style>
 </head>
 <body>
-	<div class="container">
-		<div class="row p-5">
-			<div class="col-md-6 offset-md-3">
-				<div class="card">
-					<div class="card-body">
-						<h4 class="text-center text-primary">Add Emp</h4>
+	<th:block th:replace="sections/newheader"></th:block>
+	<form action="" id="registerForm" onsubmit="registerValidate()"
+		method="post">
 
-						<form th:action="@{/register}" method="post">
+		<div class="container">
+			<center>
+				<h1>Add New Employee</h1>
+			</center>
+			<hr>
 
-							<div class="form-group">
-								<label>Enter User Name</label> <input type="text"
-									class="form-control" name="empUsrnm">
-							</div>
 
-							<div class="form-group">
-								<label>Enter Password</label> <input type="text"
-									class="form-control" name="empPwd">
-							</div>
+			<label> Username : </label> <input type="text" name="empUsrnm"
+				id="empUsrnm" placeholder="Username" size="15" /> <label>
+				Password : </label> <input type="password" name="empPwd" id="empPwd"
+				placeholder="Password" size="15" /> <label> Confirm
+				Password : </label> <input type="password" name="empCpwd" id="empCpwd"
+				placeholder="Confirm Password" size="15" />
 
-							<div class="form-group">
-								<label>Enter Role</label> <input type="text"
-									class="form-control" name="empRole">
-							</div>
-							<button class="btn btn-primary btn-block">Submit</button>
-						</form>
-					</div>
-				</div>
+			<div>
+				<span> <label> Role : </label></span> <span> <select
+					name="empRole">
+
+						<option value="Developer">Developer</option>
+						<option value="HR">HR</option>
+
+				</select>
+				</span>
+			</div>
+
+			<br>
+
+			<div>
+				<label> <input type="submit" value="Sign up"
+					class="registerbtn" />
+				</label>
+
 			</div>
 		</div>
-	</div>
-
-
-
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-		crossorigin="anonymous"></script>
+	</form>
+	<th:block th:replace="sections/newfooter"></th:block>
 </body>
 </html>
