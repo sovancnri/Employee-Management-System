@@ -69,7 +69,7 @@
 					<td th:text="${employee.empUsrnm}"></td>
 					<td th:text="${employee.empRole}"></td>
 					<td><a class="btn btn-sm btn-primary" th:href="@{/edit/{id}(id=${employee.empId})}">Edit</a></td>
-					<td><a class="btn btn-sm btn-danger" th:href="@{/delete/{id}(id=${employee.empId})}">Delete</a></td>
+					<td><a class="btn btn-sm btn-danger" th:href="@{/delete/{id}(id=${employee.empId})}" onclick="ConfirmDelete()">Delete</a></td>
 				</tr>
 			</tbody>
 		</table>
@@ -89,7 +89,14 @@
 <script>
 	/* eslint-env browser */
 	/* global document */
-
+	function ConfirmDelete()
+	{
+  		var x = confirm("Are you sure you want to delete?");
+  	if (x)
+      	return true;
+  	else
+	    return false;
+	}
 	function Pager(tableName, itemsPerPage) {
 		'use strict';
 
